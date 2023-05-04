@@ -1,0 +1,24 @@
+{
+  "name": "s03a02-enrutado-con-node",
+  "version": "1.0.0",
+  "description": "",
+  "type":"module",
+  "engines": {
+    "node": "18.x",
+    "vscode": "^1.22.0",
+    "npm":"8.x"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "#"
+  },
+  "keywords": [
+    "#"
+  ],
+  "author": "@emma",
+  "license": "MIT"
+}
