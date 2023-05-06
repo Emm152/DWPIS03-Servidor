@@ -2,15 +2,16 @@
   "name": "s03a02-enrutado-con-node",
   "version": "1.0.0",
   "description": "",
-  "type":"module",
+  "type": "module",
   "engines": {
     "node": "18.x",
     "vscode": "^1.22.0",
-    "npm":"8.x"
+    "npm": "8.x"
   },
   "main": "index.js",
   "scripts": {
-    "start": "node ./"
+    "start": "node ./",
+    "dev": "nodemon ./"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
     "#"
   ],
   "author": "@emma",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
 }

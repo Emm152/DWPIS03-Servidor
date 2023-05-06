@@ -1,5 +1,4 @@
 import path from "path";
-import http from "http";
 import { promises as fs } from 'fs';
 
 export default async (req, res) => {
@@ -11,61 +10,30 @@ export default async (req, res) => {
     // Enrutando peticiones
     switch (url) {
         case '/':
-            try {
-                const data = await fs.readFile("Index.html");
-                res.writeHead(200, { 'Content-Type': 'text/html' });
-                console.log(`📣 Respondiendo: 200 ${req.url} ${req.method}`);
-                // Estableciendo codigo de respuesta
-                res.statusCode = 200;
-                res.end(data);
-            } catch (err) {
-                console.error(err);
-                // Peticion raiz
-                // Estableciendo cabeceras
-                res.setHeader('Content-Type', 'text/html');
-                // Escribiendo la respuesta
-                res.write(`500.html `);
-                console.log(`📣 Respondiendo: 500 ${req.url} ${req.method}`);
-                console.log(`📣Error:500 ${err.message}`);
-                // Estableciendo codigo de respuesta
-                res.statusCode = 500;
-                // Cerrando la comunicacion
-                res.end();
-            }
-
-            break;
-        //caso author
-        case '/author':
-            // Peticion raiz
-            const data = await fs.readFile("author.html");
+            const inde = path.join(__dirname, 'index.html');
+            const ind = await fs.readFile(inde);
             res.writeHead(200, { 'Content-Type': 'text/html' });
             console.log(`📣 Respondiendo: 200 ${req.url} ${req.method}`);
             // Estableciendo codigo de respuesta
             res.statusCode = 200;
-            res.end(data);
+            res.end(ind);
+            break;
+        //caso author
+        case '/author':
+            // Peticion raiz
+            const auth = path.join(__dirname, 'author.html');
+            const aut = await fs.readFile(auth);
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            console.log(`📣 Respondiendo: 200 ${req.url} ${req.method}`);
+            // Estableciendo codigo de respuesta
+            res.statusCode = 200;
+            res.end(aut);
             break;
         case "/favicon.ico":
-            try {
-                const data = await fs.readFile("favicon.ico");
-                res.writeHead(200, { 'Content-Type': 'image/x-icon' });
-                res.end(data);
-            } catch (err) {
-                console.error(err);
-                // Peticion raiz
-                // Estableciendo cabeceras
-                const data = await fs.readFile("author.html");
-                res.setHeader('Content-Type', 'text/html');
-                // Escribiendo la respuesta
-                res.write(`500.html `);
-                console.log(`📣 Respondiendo: 500 ${req.url} ${req.method}`);
-                console.log(`📣Error:500 ${err.message}`);
-                // Estableciendo codigo de respuesta
-                res.statusCode = 500;
-                // Cerrando la comunicacion
-                res.end(data);
-            }
+            const fav = await fs.readFile("favicon.ico");
+            res.writeHead(200, { 'Content-Type': 'image/x-icon' });
+            res.end(fav);
             break
-
         case "/message":
             // Verificando si es post
             if (method === "POST") {
@@ -99,7 +67,8 @@ export default async (req, res) => {
                     return res.end();
                 })
             } else {
-                const data = await fs.readFile("author.html");
+                const dat = path.join(__dirname, '404.html');
+                const data = await fs.readFile(dat);
                 res.writeHead(200, { 'Content-Type': 'text/html' });
                 console.log(`📣 Respondiendo: 404 ${req.url} ${req.method}`);
                 // Estableciendo codigo de respuesta
@@ -108,9 +77,9 @@ export default async (req, res) => {
             }
             break;
         default:
-            // Peticion raiz
             // Estableciendo cabeceras
-            const err404 = await fs.readFile("404.html");
+            const err = path.join(__dirname, '404.html');
+            const err404 = await fs.readFile(err);
             res.writeHead(200, { 'Content-Type': 'text/html' });
             console.log(`📣 Respondiendo: 404 ${req.url} ${req.method}`);
             // Estableciendo codigo de respuesta
